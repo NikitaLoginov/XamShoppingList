@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="SList.Lists">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add to list"
+                     Clicked="AddToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <ListView x:Name="shoppingListView"
+                      ItemTapped="shoppingListView_ItemTapped"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding ProductName}" 
+                                           FontSize="Medium" TextColor="Black"/>
+                                    <Label Text="{Binding Notes}" 
+                                           FontSize="Subtitle"/>
+                                </StackLayout>
+                                <Label Text="{Binding Quantity}" FontSize="Medium"
+                                       TextColor="HotPink"/>
+                            </StackLayout>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete"
+                                          Clicked="DeleteToolbarItem_Clicked" 
+                                          IsDestructive="True"
+                                          CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
