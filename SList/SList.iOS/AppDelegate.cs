@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Foundation;
@@ -23,7 +24,13 @@ namespace SList.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+
+            // DB location
+            string fileName = "sList_db.db3"; // DB name
+            string folderPath = Path.Combine(Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "..", "Library"); //path to DB folder
+            string completePath = Path.Combine(folderPath, fileName); // complete path to DB
+
+            LoadApplication(new App(completePath));
 
             return base.FinishedLaunching(app, options);
         }

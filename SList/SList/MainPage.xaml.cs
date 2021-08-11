@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using SQLite;
 
@@ -21,18 +17,18 @@ namespace SList
 
         private void SaveToolbarItem_Clicked(object sender, EventArgs e)
         {
-            ProductsList entry = new ProductsList()
+            ProductModel entry = new ProductModel()
             {
-                ProductName = productEntry.Text,
-                Quantity = Convert.ToInt32(qtyEntry.Text),
-                Notes = notesEditor.Text
+                ProductName = ProductEntry.Text,
+                Quantity = Convert.ToInt32(QtyEntry.Text),
+                Notes = NotesEditor.Text
             };
 
             using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
             {
-                conn.CreateTable<ProductsList>();
+                conn.CreateTable<ProductModel>();
 
-                conn.Insert(entry);
+                conn.InsertOrReplace(entry);
                 conn.Close();
             }
 

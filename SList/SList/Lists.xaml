@@ -12,8 +12,8 @@
 
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand">
-            <ListView x:Name="shoppingListView"
-                      ItemTapped="shoppingListView_ItemTapped"
+            <ListView x:Name="ShoppingListView"
+                      ItemTapped="ShoppingListViewItemTapped"
                       SeparatorVisibility="None"
                       HasUnevenRows="True">
                 <ListView.ItemTemplate>

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +18,7 @@ namespace SList
         {
             Navigation.PushAsync(new MainPage());
         }
+        
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -30,7 +28,7 @@ namespace SList
 
         private void DeleteToolbarItem_Clicked(object sender, EventArgs e)
         {
-            var listItem = (sender as MenuItem).CommandParameter as ProductsList;
+            var listItem = (sender as MenuItem).CommandParameter as ProductModel;
             using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
             {
                 if (listItem != null)
@@ -43,16 +41,29 @@ namespace SList
 
             RefreshList();
         }
-        private void shoppingListView_ItemTapped(object sender, ItemTappedEventArgs e)
+
+        private void ShoppingListViewItemTapped(object sender, ItemTappedEventArgs e)
         {
+            var mainPage = new MainPage();
+            
+            if(e.Item == null)
+                throw new ArgumentException("Item cannot be null!", nameof(e.Item));
+            var model = (e.Item as ProductModel);
+            
+            mainPage.ProductEntry.Text = model.ProductName;
+            mainPage.QtyEntry.Text = model.Quantity.ToString();
+            mainPage.NotesEditor.Text = model.Notes;
+            
+            Navigation.PushAsync(mainPage);
         }
+        
         private void RefreshList()
         {
             using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
             {
-                conn.CreateTable<ProductsList>();
-                List<ProductsList> products = conn.Table<ProductsList>().ToList();
-                shoppingListView.ItemsSource = products;
+                conn.CreateTable<ProductModel>();
+                List<ProductModel> products = conn.Table<ProductModel>().ToList();
+                ShoppingListView.ItemsSource = products;
             }
         }
     }

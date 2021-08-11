@@ -22,15 +22,18 @@
                     <ColumnDefinition Width="330"/>
                     <ColumnDefinition Width="80"/>
                 </Grid.ColumnDefinitions>
-                <Entry x:Name="productEntry"
+                <Entry x:Name="ProductEntry"
+                       x:FieldModifier="public"
                        Placeholder="Product"
                        Grid.Row="0" Grid.Column="0"/>
-                <Entry x:Name="qtyEntry"
+                <Entry x:Name="QtyEntry"
+                       x:FieldModifier="public"
                        Placeholder="Qty"
                        Grid.Row="0" Grid.Column="1"
                        Keyboard="Numeric"/>
             </Grid>
-            <Editor x:Name="notesEditor"
+            <Editor x:Name="NotesEditor"
+                    x:FieldModifier="public"
                     Placeholder="Notes"
                     VerticalOptions="FillAndExpand"
                     Margin="20,20,20,20"/>
