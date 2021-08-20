@@ -28,16 +28,8 @@ namespace SList
 
         private void DeleteToolbarItem_Clicked(object sender, EventArgs e)
         {
-            var listItem = (sender as MenuItem).CommandParameter as ProductModel;
-            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-            {
-                if (listItem != null)
-                {
-                    conn.Delete(listItem);
-
-                    conn.Close();
-                }  
-            }
+            var listItem = (sender as MenuItem)?.CommandParameter as ProductModel;
+            listItem?.DeleteItem();
 
             RefreshList();
         }
@@ -46,13 +38,14 @@ namespace SList
         {
             var mainPage = new MainPage();
             
-            if(e.Item == null)
-                throw new ArgumentException("Item cannot be null!", nameof(e.Item));
-            var model = (e.Item as ProductModel);
-            
-            mainPage.ProductEntry.Text = model.ProductName;
-            mainPage.QtyEntry.Text = model.Quantity.ToString();
-            mainPage.NotesEditor.Text = model.Notes;
+            switch (e.Item)
+            {
+                case null:
+                    throw new ArgumentException("Item cannot be null!", nameof(e.Item));
+                case ProductModel model:
+                    model.EditItem(mainPage);
+                    break;
+            }
             
             Navigation.PushAsync(mainPage);
         }

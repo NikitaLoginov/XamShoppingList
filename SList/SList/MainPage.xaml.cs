@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using Xamarin.Forms;
-using SQLite;
 
 namespace SList
 {
@@ -12,27 +11,16 @@ namespace SList
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        private ProductModel productModel;
         public MainPage()
         {
+            productModel = new ProductModel();
             InitializeComponent();
         }
 
         private void SaveToolbarItem_Clicked(object sender, EventArgs e)
         {
-            ProductModel entry = new ProductModel()
-            {
-                ProductName = ProductEntry.Text,
-                Quantity = Convert.ToInt32(QtyEntry.Text),
-                Notes = NotesEditor.Text
-            };
-
-            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-            {
-                conn.CreateTable<ProductModel>();
-
-                conn.InsertOrReplace(entry);
-                conn.Close();
-            }
+            productModel.SaveItem(ProductEntry, QtyEntry, NotesEditor);
 
             Navigation.PopToRootAsync();
         }
