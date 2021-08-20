@@ -21,13 +21,7 @@ namespace SList
             Quantity = Convert.ToInt32(qtyEntry.Text);
             Notes = notesEditor.Text;
             
-            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-            {
-                conn.CreateTable<ProductModel>();
-                
-                conn.InsertOrReplace(this);
-                conn.Close();
-            }
+            DataManager.SaveData(this);
         }
 
         public void EditItem(MainPage mainPage)
@@ -39,14 +33,7 @@ namespace SList
 
         public void DeleteItem()
         {
-            using (SQLiteConnection conn = new SQLiteConnection(App.FilePath))
-            {
-                //conn.DeleteAll<ProductModel>();
-                //conn.Delete(this);
-                conn.Delete<ProductModel>(Id);
-
-                conn.Close();
-            }
+            DataManager.DeleteData(this);
         }
     }
 }
