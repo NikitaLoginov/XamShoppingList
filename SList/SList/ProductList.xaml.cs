@@ -7,9 +7,9 @@ using Xamarin.Forms.Xaml;
 namespace SList
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Lists : ContentPage
+    public partial class ProductList : ContentPage
     {
-        public Lists()
+        public ProductList()
         {
             InitializeComponent();
         }

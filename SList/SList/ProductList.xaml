@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SList.Lists">
+             x:Class="SList.ProductList">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add to list"
                      Clicked="AddToolbarItem_Clicked"/>

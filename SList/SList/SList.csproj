@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Lists.xaml">
+    <EmbeddedResource Update="ProductList.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

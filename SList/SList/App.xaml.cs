@@ -17,7 +17,7 @@ namespace SList
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new Lists());
+            MainPage = new NavigationPage(new ProductList());
             FilePath = filePath;
         }
         protected override void OnStart()
